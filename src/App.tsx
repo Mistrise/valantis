@@ -1,24 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
 
+interface DataFromApi {
+  action: string,
+  result: string[]
+}
+
+//@ts-nocheck
 function App() {
+  const [products, setProducts] = useState([])
+  useEffect( () => {
+    const currentDate = new Date()
+    // @ts-ignore
+    fetch('http://api.valantis.store:40000/', {
+      method: 'POST',
+      headers: {
+        "X-Auth": `md5("password_${currentDate.getFullYear()}${currentDate.getMonth()}${currentDate.getDate()}")`
+      },
+      body: {
+        // @ts-ignore
+        "action": "get_ids",
+        "params": {"offset": 10, "limit": 3}
+      }
+    })
+        .then(res => res.json())
+        // @ts-ignore
+        .then((data: DataFromApi) => setProducts([...products, data.result]))
+  }, [products]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {products.map(e => {
+        return <div key={e}>{e}</div>
+      })}
     </div>
   );
 }
