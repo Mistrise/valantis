@@ -1,0 +1,8 @@
+.navBar {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    position: sticky;
+    border: #282c34 1px solid;
+}
