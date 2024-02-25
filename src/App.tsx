@@ -1,100 +1,56 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import authKey from "./helpers/authGenerator";
-import CardContainer from "./components /CardContainer/CardContainer";
-import {Card} from "./components /Card/Card";
-import NavBar from "./components /NavBar/NavBar";
+import CardContainer from "./components/CardContainer/CardContainer";
+import {Card} from "./components/Card/Card";
+import NavBar from "./components/NavBar/NavBar";
+import {getPaginatedProducts} from "./helpers/products";
 
 interface Product {
-  brand: string | null
-  id: string
-  price: number
-  product: string
+    brand?: string | null
+    id: string
+    price: number
+    product: string
 }
 
 function App() {
-  const [ids, setIds] = useState<string[]>([])
 
-  const [products, setProducts] = useState<Product[]>([
-    {
-      brand: null,
-      id: 'init',
-      price: 0,
-      product: '',
-    }
-  ])
+    const [products, setProducts] = useState<Product[]>([])
 
-  const bodyIds = {
-    "action": "get_ids",
-    "params": {"limit": 50}
-  }
+    const [page, setPage] = useState(1)
 
-  const fetchIds = async () => {
-    try {
-      const response = await fetch('http://api.valantis.store:40000/', {
-        method: 'POST',
-        headers: {
-          "X-Auth": authKey,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(bodyIds)
-      })
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json()
-      setIds([data.result])
-    } catch (error) {
-      console.error('Error is:', error)
-    }
-  }
-
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch('http://api.valantis.store:40000/', {
-        method: 'POST',
-        headers: {
-          "X-Auth": authKey,
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          "action": "get_items",
-          "params": {"ids": ids[0]}
+    useEffect( () => {
+        getPaginatedProducts(page).then((result) => {
+            setProducts(result)
         })
-      })
+    }, [page]);
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json()
-      setProducts([...data.result])
-    } catch (error) {
-      console.error('Error is:', error)
-    }
-  }
+    const goToNextPage = useCallback(() => {
+        setPage(page + 1)
+    }, [page]);
 
-  useEffect( () => {
-    fetchIds()
-    fetchProducts()
-  }, [ids]);
+    const goToPrevPage = useCallback(() => {
+        setPage(page - 1)
+    }, [page]);
 
-  return (
-      <>
-        <NavBar/>
-        <CardContainer>
-          {products.map(product => {
-            return <Card
-                key={product.id}
-                id={product.id}
-                price={product.price}
-                brand={product.brand}
-                product={product.product}
-            />
-          })}
-        </CardContainer>
-      </>
-  );
+    return (
+        <>
+            <NavBar/>
+            <CardContainer>
+                {products.map(product => {
+                    return <Card
+                        key={product.id}
+                        id={product.id}
+                        price={product.price}
+                        brand={product.brand}
+                        product={product.product}
+                    />
+                })}
+            </CardContainer>
+            <button onClick={goToPrevPage}>-</button>
+            {page}
+            <button onClick={goToNextPage}>+</button>
+        </>
+    );
 }
 
 export default App;

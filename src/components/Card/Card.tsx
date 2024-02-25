@@ -1,13 +1,7 @@
 import styles from './Card.module.css'
+import {Product} from "../../types";
 
-interface CardProps {
-    id: string,
-    price: number,
-    brand: string | null,
-    product: string
-}
-
-export const Card = ({id, brand, price, product}:CardProps) => {
+export const Card = ({id, brand, price, product}: Product) => {
     return (<div className={styles.card}>
         <div>{product}</div>
         <div>{brand}</div>
