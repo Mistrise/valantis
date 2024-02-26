@@ -32,7 +32,7 @@ export const fetchIds = async (offset: number, limit: number) => {
 
 export const fetchProducts = async (ids: string[]): Promise<Product[]> => {
   try {
-    const response = await fetch('http://api.valantis.store:40000/', {
+    const response = await fetch('https://api.valantis.store:41000/', {
       method: 'POST',
       headers: {
         "X-Auth": authKey,
