@@ -50,9 +50,9 @@ function App() {
                             </Grid>)
                     })}
                 </GridContainer>
-                <Button variant='contained' onClick={goToPrevPage}>Prev</Button>
-                <Typography display='inline-block' color="text.secondary" >{page}</Typography>
-                <Button variant='contained' onClick={goToNextPage}>Next</Button>
+                <Button size='small' variant='contained' onClick={goToPrevPage} sx={{marginBottom: 2}}>Prev</Button>
+                <Typography display='inline-block' color="text.secondary" sx={{marginLeft: 2, marginRight: 2, marginBottom: 2}}>{page}</Typography>
+                <Button size='small' variant='contained' onClick={goToNextPage} sx={{marginBottom: 2}}>Next</Button>
             </Container>
         </>
     );
