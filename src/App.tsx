@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import authKey from "./helpers/authGenerator";
-import CardContainer from "./components/CardContainer/CardContainer";
-import {Card} from "./components/Card/Card";
-import NavBar from "./components/NavBar/NavBar";
+import GridContainer from "./components/CardContainer/GridContainer";
+import {JewelryCard} from "./components/Card/JewelryCard";
+import DenseBar from "./components/NavBar/DenseBar";
 import {getPaginatedProducts} from "./helpers/products";
+import {Button, Container, Grid, Typography} from "@mui/material";
 
 interface Product {
     brand?: string | null
@@ -34,21 +34,26 @@ function App() {
 
     return (
         <>
-            <NavBar/>
-            <CardContainer>
-                {products.map(product => {
-                    return <Card
-                        key={product.id}
-                        id={product.id}
-                        price={product.price}
-                        brand={product.brand}
-                        product={product.product}
-                    />
-                })}
-            </CardContainer>
-            <button onClick={goToPrevPage}>-</button>
-            {page}
-            <button onClick={goToNextPage}>+</button>
+            <DenseBar/>
+            <Container maxWidth='lg'>
+                <GridContainer>
+                    {products.map(product => {
+                        return (
+                            <Grid item xs={2} sm={4} md={4} key={product.id}>
+                                <JewelryCard
+                                key={product.id}
+                                id={product.id}
+                                price={product.price}
+                                brand={product.brand}
+                                product={product.product}
+                                />
+                            </Grid>)
+                    })}
+                </GridContainer>
+                <Button variant='contained' onClick={goToPrevPage}>Prev</Button>
+                <Typography display='inline-block' color="text.secondary" >{page}</Typography>
+                <Button variant='contained' onClick={goToNextPage}>Next</Button>
+            </Container>
         </>
     );
 }
