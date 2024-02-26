@@ -35,11 +35,11 @@ function App() {
     return (
         <>
             <DenseBar/>
-            <Container maxWidth='lg'>
+            <Container>
                 <GridContainer>
                     {products.map(product => {
                         return (
-                            <Grid item xs={2} sm={4} md={4} key={product.id}>
+                            <Grid item xs={2} sm={2} md={2} key={product.id}>
                                 <JewelryCard
                                 key={product.id}
                                 id={product.id}

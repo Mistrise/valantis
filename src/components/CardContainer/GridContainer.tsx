@@ -3,7 +3,10 @@ import {Grid} from "@mui/material";
 
 const GridContainer = (props: any) => {
     return (
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} sx={{marginBottom: 2}}>
+        <Grid container
+              spacing={{ xs: 2, md: 3, lg: 3 }}
+              columns={{ sm: 2, md: 4, lg: 6 }}
+              sx={{marginBottom: 2}}>
             {props.children}
         </Grid>)
 }

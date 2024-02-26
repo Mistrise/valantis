@@ -1,6 +1,8 @@
 import authKey from "./authGenerator";
 import {Product} from "../types";
 
+const FETCH_ENDPOINT = 'https://api.valantis.store:41000/'
+
 export const fetchIds = async (offset: number, limit: number) => {
   try {
     const body = {
@@ -8,7 +10,7 @@ export const fetchIds = async (offset: number, limit: number) => {
       "params": {offset, limit}
     }
 
-    const response = await fetch('https://api.valantis.store:41000/', {
+    const response = await fetch(FETCH_ENDPOINT, {
       method: 'POST',
       headers: {
         "X-Auth": authKey,
@@ -32,7 +34,7 @@ export const fetchIds = async (offset: number, limit: number) => {
 
 export const fetchProducts = async (ids: string[]): Promise<Product[]> => {
   try {
-    const response = await fetch('https://api.valantis.store:41000/', {
+    const response = await fetch(FETCH_ENDPOINT, {
       method: 'POST',
       headers: {
         "X-Auth": authKey,
