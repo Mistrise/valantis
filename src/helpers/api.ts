@@ -57,3 +57,30 @@ export const fetchProducts = async (ids: string[]): Promise<Product[]> => {
   }
 }
 
+export const fetchFilteredIds = async (params: string) => {
+  try {
+    const body = {
+      "action": "filter",
+      "params": {params}
+    }
+
+    const response = await fetch(FETCH_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        "X-Auth": authKey,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    })
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json()
+    return data.result;
+  } catch (error) {
+    console.error('Error is:', error)
+    throw error;
+  }
+}
