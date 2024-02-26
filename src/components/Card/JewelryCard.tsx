@@ -7,11 +7,11 @@ export const JewelryCard = ({id, brand, price, product}: Product) => {
     return (
         <Card sx={{ minWidth: 275 }}>
             <CardMedia
-                sx={{ height: 140 }}
+                sx={{ height: 150 }}
                 image={notFoundImage}
                 title="image of jewelry"
             />
-            <CardContent sx={{height: 80}}>
+            <CardContent sx={{height: 75}}>
                 <Typography sx={{fontSize: 14}} gutterBottom variant="h5" component="div">
                     {product}
                 </Typography>

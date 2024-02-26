@@ -3,7 +3,8 @@ import GridContainer from "./components/CardContainer/GridContainer";
 import {JewelryCard} from "./components/Card/JewelryCard";
 import DenseBar from "./components/NavBar/DenseBar";
 import {getPaginatedProducts} from "./helpers/products";
-import {Button, Container, Grid, Typography} from "@mui/material";
+import {Button, Container, Grid, Skeleton, Typography} from "@mui/material";
+import CardSkeleton from "./components/CardSkeleton/CardSkeleton";
 
 interface Product {
     brand?: string | null
@@ -37,7 +38,8 @@ function App() {
             <DenseBar/>
             <Container>
                 <GridContainer>
-                    {products.map(product => {
+                    {products.length !== 0 ?
+                        products.map(product => {
                         return (
                             <Grid item xs={2} sm={2} md={2} key={product.id}>
                                 <JewelryCard
@@ -48,7 +50,8 @@ function App() {
                                 product={product.product}
                                 />
                             </Grid>)
-                    })}
+                    }) :
+                        <CardSkeleton/>}
                 </GridContainer>
                 <Button size='small' variant='contained' onClick={goToPrevPage} sx={{marginBottom: 2}}>Prev</Button>
                 <Typography display='inline-block' color="text.secondary" sx={{marginLeft: 2, marginRight: 2, marginBottom: 2}}>{page}</Typography>
