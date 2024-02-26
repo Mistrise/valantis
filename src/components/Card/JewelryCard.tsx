@@ -12,17 +12,16 @@ export const JewelryCard = ({id, brand, price, product}: Product) => {
                 title="image of jewelry"
             />
             <CardContent sx={{height: 75}}>
-                <Typography sx={{fontSize: 14}} gutterBottom variant="h5" component="div">
+                <Typography sx={{fontSize: 14, marginBottom: 0, fontWeight: 600}} gutterBottom variant="h5" component="div">
                     {product}
                 </Typography>
-
-                <Typography sx={{fontSize: 14}} gutterBottom variant="h4" component="div">
+                <Typography sx={{fontSize: 14, marginBottom: 0}} gutterBottom variant="h5" component="div">
                     {price}
                 </Typography>
-                <Typography sx={{fontSize: 14}} variant="body2" color="text.secondary">
+                <Typography sx={{fontSize: 14, marginBottom: 0}} variant="body2" color="text.secondary">
                     {brand ? brand : 'brand is not specified'}
                 </Typography>
-                <Typography sx={{fontSize: 8}} gutterBottom variant="h6" component="div">
+                <Typography sx={{fontSize: 8, marginBottom: 0}} gutterBottom variant="h5" component="div">
                     {id}
                 </Typography>
             </CardContent>
