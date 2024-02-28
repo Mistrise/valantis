@@ -3,7 +3,7 @@ import GridContainer from "./components/CardContainer/GridContainer";
 import {JewelryCard} from "./components/Card/JewelryCard";
 import DenseBar from "./components/NavBar/DenseBar";
 import {getPaginatedProducts} from "./helpers/products";
-import {Button, Container, Grid, Skeleton, Typography} from "@mui/material";
+import {Button, Container, Grid, Typography} from "@mui/material";
 import CardSkeleton from "./components/CardSkeleton/CardSkeleton";
 
 interface Product {
@@ -19,11 +19,17 @@ function App() {
 
     const [page, setPage] = useState(1)
 
+    const [formInput, setFormInput] = useState('')
+
     useEffect( () => {
         getPaginatedProducts(page).then((result) => {
             setProducts(result)
         })
     }, [page]);
+
+    useEffect(() => {
+        console.log("form effect", formInput)
+    }, [formInput])
 
     const goToNextPage = useCallback(() => {
         setPage(page + 1)
@@ -35,7 +41,7 @@ function App() {
 
     return (
         <>
-            <DenseBar/>
+            <DenseBar setFormInput={setFormInput}/>
             <Container>
                 <GridContainer>
                     {products.length !== 0 ?

@@ -57,13 +57,14 @@ export const fetchProducts = async (ids: string[]): Promise<Product[]> => {
   }
 }
 
-export const fetchFilteredIds = async (params: string) => {
+export const fetchFilteredIds = async (params: {}) => {
+
   try {
     const body = {
       "action": "filter",
-      "params": {params}
+      params
     }
-
+    console.log("body is", body)
     const response = await fetch(FETCH_ENDPOINT, {
       method: 'POST',
       headers: {
