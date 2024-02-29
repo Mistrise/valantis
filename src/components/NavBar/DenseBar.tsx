@@ -4,6 +4,7 @@ import React, {useState} from "react";
 
 const style = {
     display: 'flex',
+    margin: 'auto',
     flexDirection: 'row',
     '& svg': {
         m: 1,
@@ -28,9 +29,12 @@ export default function DenseBar({setFormInput}: any) {
     }
 
     return (
-        <AppBar sx={{marginBottom: 3}}>
-                <form onSubmit={(event) => handleSubmit(event)} >
+        <AppBar sx={{marginBottom: 3, backgroundColor: '#c5aa6a', alignItems: 'center'}} >
+                <form  onSubmit={(event) => handleSubmit(event)} >
                     <FormGroup sx={style}>
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120, paddingTop: "5.5px", paddingBottom: "5.5px" }}>
+                            <TextField placeholder={'Filter'} onChange={(event) => setTextInput(event.target.value)}/>
+                        </FormControl>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                             <Select defaultValue="brand" id="filter" onChange={(event:SelectChangeEvent<string>) => {
                                 setSelect(event.target.value)
@@ -40,11 +44,8 @@ export default function DenseBar({setFormInput}: any) {
                                 <MenuItem value={"product"}>product</MenuItem>
                             </Select>
                         </FormControl>
-                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                            <TextField placeholder={'Filter'} onChange={(event) => setTextInput(event.target.value)}/>
-                        </FormControl>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120, display: 'inline-block' }}>
-                            <Button color={"secondary"} type={"submit"}>Submit</Button>
+                            <Button disabled={!(textInput !== '')} color={"secondary"} type={"submit"}>Submit</Button>
                         </FormControl>
                     </FormGroup>
                 </form>
