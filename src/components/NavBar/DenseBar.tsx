@@ -33,7 +33,7 @@ export default function DenseBar({setFormInput}: any) {
                 <form  onSubmit={(event) => handleSubmit(event)} >
                     <FormGroup sx={style}>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                            <Select defaultValue="product" id="filter" onChange={(event:SelectChangeEvent<string>) => {
+                            <Select size={'medium'} defaultValue="product" id="filter" onChange={(event:SelectChangeEvent<string>) => {
                                 setSelect(event.target.value)
                             }}>
                                 <MenuItem value={"product"}>product</MenuItem>
