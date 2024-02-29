@@ -28,7 +28,7 @@ export default function DenseBar({setFormInput}: any) {
     }
 
     return (
-        <AppBar>
+        <AppBar sx={{marginBottom: 3}}>
                 <form onSubmit={(event) => handleSubmit(event)} >
                     <FormGroup sx={style}>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
@@ -43,7 +43,7 @@ export default function DenseBar({setFormInput}: any) {
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                             <TextField placeholder={'Filter'} onChange={(event) => setTextInput(event.target.value)}/>
                         </FormControl>
-                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120, display: 'inline-block' }}>
                             <Button color={"secondary"} type={"submit"}>Submit</Button>
                         </FormControl>
                     </FormGroup>
