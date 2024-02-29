@@ -1,5 +1,5 @@
 import AppBar from '@mui/material/AppBar';
-import {Button, FormControl, FormGroup, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
+import {Box, Button, FormControl, FormGroup, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import React, {useState} from "react";
 
 const style = {
@@ -32,20 +32,20 @@ export default function DenseBar({setFormInput}: any) {
         <AppBar sx={{marginBottom: 3, backgroundColor: '#c5aa6a', alignItems: 'center'}} >
                 <form  onSubmit={(event) => handleSubmit(event)} >
                     <FormGroup sx={style}>
-                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120, paddingTop: "5.5px", paddingBottom: "5.5px" }}>
-                            <TextField placeholder={'Filter'} onChange={(event) => setTextInput(event.target.value)}/>
-                        </FormControl>
+                            <FormControl variant="standard" sx={{ m: 1, minWidth: 120, }}>
+                                <TextField placeholder={'Filter'} onChange={(event) => setTextInput(event.target.value)}/>
+                            </FormControl>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-                            <Select defaultValue="brand" id="filter" onChange={(event:SelectChangeEvent<string>) => {
+                            <Select defaultValue="product" id="filter" onChange={(event:SelectChangeEvent<string>) => {
                                 setSelect(event.target.value)
                             }}>
+                                <MenuItem value={"product"}>product</MenuItem>
                                 <MenuItem value={"brand"}>brand</MenuItem>
                                 <MenuItem value={"price"}>price</MenuItem>
-                                <MenuItem value={"product"}>product</MenuItem>
                             </Select>
                         </FormControl>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120, display: 'inline-block' }}>
-                            <Button disabled={!(textInput !== '')} color={"secondary"} type={"submit"}>Submit</Button>
+                            <Button disabled={!(textInput !== '')} sx={{backgroundColor: 'gray', color: "white"}} type={"submit"}>Submit</Button>
                         </FormControl>
                     </FormGroup>
                 </form>
