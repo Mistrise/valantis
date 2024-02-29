@@ -5,6 +5,7 @@ import DenseBar from "./components/NavBar/DenseBar";
 import {getPaginatedProducts} from "./helpers/products";
 import {Button, Container, Grid, Typography} from "@mui/material";
 import CardSkeleton from "./components/CardSkeleton/CardSkeleton";
+import {getFilteredProducts} from "./helpers/filterProducts";
 
 interface Product {
     brand?: string | null
@@ -19,7 +20,7 @@ function App() {
 
     const [page, setPage] = useState(1)
 
-    const [formInput, setFormInput] = useState('')
+    const [formInput, setFormInput] = useState({})
 
     useEffect( () => {
         getPaginatedProducts(page).then((result) => {
@@ -28,7 +29,11 @@ function App() {
     }, [page]);
 
     useEffect(() => {
-        console.log("form effect", formInput)
+        if (Object.keys(formInput).length !== 0) {
+            getFilteredProducts(formInput).then((result) => {
+                setProducts(result)
+            })
+        }
     }, [formInput])
 
     const goToNextPage = useCallback(() => {
