@@ -32,9 +32,6 @@ export default function DenseBar({setFormInput}: any) {
         <AppBar sx={{marginBottom: 3, backgroundColor: '#c5aa6a', alignItems: 'center'}} >
                 <form  onSubmit={(event) => handleSubmit(event)} >
                     <FormGroup sx={style}>
-                            <FormControl variant="standard" sx={{ m: 1, minWidth: 120, }}>
-                                <TextField placeholder={'Filter'} onChange={(event) => setTextInput(event.target.value)}/>
-                            </FormControl>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
                             <Select defaultValue="product" id="filter" onChange={(event:SelectChangeEvent<string>) => {
                                 setSelect(event.target.value)
@@ -43,6 +40,9 @@ export default function DenseBar({setFormInput}: any) {
                                 <MenuItem value={"brand"}>brand</MenuItem>
                                 <MenuItem value={"price"}>price</MenuItem>
                             </Select>
+                        </FormControl>
+                        <FormControl variant="standard" sx={{ m: 1, minWidth: 120, }}>
+                            <TextField size={'small'} placeholder={'Filter'} onChange={(event) => setTextInput(event.target.value)}/>
                         </FormControl>
                         <FormControl variant="standard" sx={{ m: 1, minWidth: 120, display: 'inline-block' }}>
                             <Button disabled={!(textInput !== '')} sx={{backgroundColor: 'gray', color: "white"}} type={"submit"}>Submit</Button>
